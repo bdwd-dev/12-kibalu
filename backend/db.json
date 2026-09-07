@@ -1,0 +1,171 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "KIBALU-Box Pro",
+      "price": 150000,
+      "category": "antivol",
+      "description": "Boîtier antivol GPS pour moto/véhicule. Accéléromètre 3 axes, sirène 125dB, batterie 72h",
+      "specs": [
+        "GPS U-Blox",
+        "Accéléromètre 3 axes",
+        "Sirène 125dB",
+        "Batterie 72h",
+        "USSD/GPRS"
+      ],
+      "stock": 25
+    },
+    {
+      "id": 2,
+      "name": "KIBALU-Spray",
+      "price": 15000,
+      "category": "defense",
+      "description": "Spray de défense concentré avec marqueur UV indélébile",
+      "specs": [
+        "Marqueur UV",
+        "Portable",
+        "Efficace 3 ans"
+      ],
+      "stock": 150
+    },
+    {
+      "id": 3,
+      "name": "KIBALU-Alarm",
+      "price": 25000,
+      "category": "defense",
+      "description": "Dispositif de poche anti-vol à la tire, déclenchement par arrachement",
+      "specs": [
+        "130dB",
+        "Compact",
+        "Batterie 1 an"
+      ],
+      "stock": 80
+    },
+    {
+      "id": 4,
+      "name": "KIBALU-Track",
+      "price": 85000,
+      "category": "tracker",
+      "description": "Tracker GPS autonome pour biens de valeur",
+      "specs": [
+        "GPS temps réel",
+        "Geofencing",
+        "Batterie 30 jours",
+        "Application mobile"
+      ],
+      "stock": 40
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "customer": {
+        "name": "M. Boukaka",
+        "phone": "+242061111111",
+        "city": "Brazzaville"
+      },
+      "items": [
+        {
+          "product_id": 1,
+          "name": "KIBALU-Box Pro",
+          "qty": 1,
+          "price": 150000
+        }
+      ],
+      "total": 150000,
+      "status": "delivered"
+    },
+    {
+      "id": 2,
+      "customer": {
+        "name": "Mme. Nguimbi",
+        "phone": "+242062222222",
+        "city": "Pointe-Noire"
+      },
+      "items": [
+        {
+          "product_id": 2,
+          "name": "KIBALU-Spray",
+          "qty": 2,
+          "price": 30000
+        }
+      ],
+      "total": 30000,
+      "status": "shipped"
+    },
+    {
+      "id": 3,
+      "customer": {
+        "name": "Garage Central",
+        "phone": "+242063333333",
+        "city": "Brazzaville"
+      },
+      "items": [
+        {
+          "product_id": 1,
+          "name": "KIBALU-Box Pro",
+          "qty": 5,
+          "price": 750000
+        }
+      ],
+      "total": 750000,
+      "status": "pending"
+    }
+  ],
+  "devices": [
+    {
+      "id": "KB-001",
+      "type": "KIBALU-Box Pro",
+      "client": "M. Boukaka",
+      "vehicle": "Moto Honda CBF",
+      "plate": "BZ-1234",
+      "status": "active",
+      "battery": 85,
+      "alerts_count": 2,
+      "last_alert": {
+        "type": "vibration",
+        "message": "Tentative de déplacement détectée",
+        "timestamp": "2026-09-07T03:15:00Z"
+      }
+    },
+    {
+      "id": "KB-002",
+      "type": "KIBALU-Box Pro",
+      "client": "Mme. Nguimbi",
+      "vehicle": "Toyota Corolla",
+      "plate": "BZ-5678",
+      "status": "active",
+      "battery": 92,
+      "alerts_count": 0
+    },
+    {
+      "id": "KB-003",
+      "type": "KIBALU-Track",
+      "client": "Transco SARL",
+      "vehicle": "Camion Mitsubishi",
+      "plate": "BZ-9012",
+      "status": "active",
+      "battery": 67,
+      "alerts_count": 5,
+      "last_alert": {
+        "type": "geofence",
+        "message": "Sortie zone autorisée",
+        "timestamp": "2026-09-07T08:30:00Z"
+      }
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin KIBALU",
+      "email": "admin@kibalu.cg",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "name": "Support Technique",
+      "email": "support@kibalu.cg",
+      "role": "support"
+    }
+  ]
+}

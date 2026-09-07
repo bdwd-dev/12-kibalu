@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KIBALU — Security Solutions</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0a; color: #fff; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+    .header { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #222; }
+    .logo { font-size: 28px; font-weight: 900; color: #E53E3E; letter-spacing: 2px; }
+    .nav { display: flex; gap: 24px; }
+    .nav a { color: #888; text-decoration: none; font-size: 14px; }
+    .nav a:hover, .nav a.active { color: #E53E3E; }
+    .hero { padding: 40px 0; }
+    .hero h1 { font-size: 32px; margin-bottom: 8px; }
+    .hero p { color: #666; font-size: 16px; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 24px 0; }
+    .stat-card { background: #141414; border-radius: 12px; padding: 20px; border: 1px solid #222; }
+    .stat-value { font-size: 32px; font-weight: bold; color: #E53E3E; }
+    .stat-label { font-size: 12px; color: #666; margin-top: 4px; text-transform: uppercase; }
+    .section { margin: 32px 0; }
+    .section-title { font-size: 20px; font-weight: 600; margin-bottom: 16px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .card { background: #141414; border-radius: 12px; padding: 20px; border: 1px solid #222; }
+    .card:hover { border-color: #E53E3E; }
+    .card-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .card-sub { color: #666; font-size: 13px; }
+    .btn { background: #E53E3E; color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 14px; cursor: pointer; font-weight: 600; }
+    .btn:hover { opacity: 0.9; }
+    .btn-sm { padding: 6px 12px; font-size: 12px; }
+    .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+    .badge-active { background: #1a3a1a; color: #4ade80; }
+    .badge-pending { background: #3a2a1a; color: #fbbf24; }
+    .badge-delivered { background: #1a1a3a; color: #818cf8; }
+    .badge-shipped { background: #1a2a3a; color: #38bdf8; }
+    .table { width: 100%; border-collapse: collapse; }
+    .table th { text-align: left; padding: 12px; color: #666; font-size: 12px; text-transform: uppercase; border-bottom: 1px solid #222; }
+    .table td { padding: 12px; border-bottom: 1px solid #1a1a1a; font-size: 14px; }
+    .table tr:hover { background: #1a1a1a; }
+    .footer { text-align: center; padding: 40px 0; color: #444; font-size: 13px; border-top: 1px solid #222; margin-top: 40px; }
+    .alert-box { background: #2a1a1a; border-left: 4px solid #E53E3E; padding: 12px; margin: 8px 0; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+    const API = "http://localhost:3012/api";
+
+    function App() {
+      const [stats, setStats] = useState({});
+      const [products, setProducts] = useState([]);
+      const [orders, setOrders] = useState([]);
+      const [devices, setDevices] = useState([]);
+
+      useEffect(() => {
+        fetch(`${API}/stats`).then(r => r.json()).then(setStats);
+        fetch(`${API}/products`).then(r => r.json()).then(setProducts);
+        fetch(`${API}/orders`).then(r => r.json()).then(setOrders);
+        fetch(`${API}/devices`).then(r => r.json()).then(setDevices);
+      }, []);
+
+      return (
+        <div>
+          <header className="header">
+            <div className="logo">🔒 KIBALU</div>
+            <nav className="nav">
+              <a href="#" className="active">Catalogue</a>
+              <a href="#">Dashboard</a>
+              <a href="#">Commandes</a>
+              <a href="#">Alertes</a>
+            </nav>
+          </header>
+
+          <div className="container">
+            <section className="hero">
+              <h1>KIBALU Security Solutions</h1>
+              <p>Boîtiers antivol GPS • Défense personnelle • Tracking temps réel</p>
+            </section>
+
+            <div className="stats">
+              <div className="stat-card">
+                <div className="stat-value">{stats.products || 0}</div>
+                <div className="stat-label">Produits</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-value">{stats.orders || 0}</div>
+                <div className="stat-label">Commandes</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-value">{stats.devices || 0}</div>
+                <div className="stat-label">Dispositifs actifs</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-value">{stats.revenue ? stats.revenue.toLocaleString() : 0} F</div>
+                <div className="stat-label">CA</div>
+              </div>
+            </div>
+
+            <section className="section">
+              <h2 className="section-title">🛡️ Catalogue Produits</h2>
+              <div className="grid">
+                {products.map(p => (
+                  <div key={p.id} className="card">
+                    <div className="card-title">{p.name}</div>
+                    <div className="card-sub">{p.description}</div>
+                    <div style={{marginTop:8, fontSize:20, fontWeight:'bold', color:'#E53E3E'}}>{p.price.toLocaleString()} XAF</div>
+                    <div style={{marginTop:4}}>
+                      {p.specs?.map((s, i) => <span key={i} className="badge badge-active" style={{marginRight:4, marginBottom:4}}>{s}</span>)}
+                    </div>
+                    <button className="btn btn-sm" style={{marginTop:8}}>Ajouter au panier</button>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section className="section">
+              <h2 className="section-title">📍 Dashboard Dispositifs</h2>
+              <div className="grid">
+                {devices.map(d => (
+                  <div key={d.id} className="card">
+                    <div style={{display:'flex', justifyContent:'space-between'}}>
+                      <div className="card-title">{d.type}</div>
+                      <span className="badge badge-active">{d.status}</span>
+                    </div>
+                    <div className="card-sub">Client: {d.client}</div>
+                    <div className="card-sub">{d.vehicle} • {d.plate}</div>
+                    <div style={{marginTop:8}}>
+                      🔋 {d.battery}% • 🚨 {d.alerts_count} alertes
+                    </div>
+                    {d.last_alert && (
+                      <div className="alert-box" style={{marginTop:8}}>
+                        <strong>{d.last_alert.type}</strong>: {d.last_alert.message}
+                        <br/><small>{new Date(d.last_alert.timestamp).toLocaleString('fr-FR')}</small>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section className="section">
+              <h2 className="section-title">📦 Commandes</h2>
+              <table className="table">
+                <thead><tr><th>ID</th><th>Client</th><th>Total</th><th>Statut</th></tr></thead>
+                <tbody>
+                  {orders.map(o => (
+                    <tr key={o.id}>
+                      <td>#{o.id}</td>
+                      <td>{o.customer?.name}</td>
+                      <td>{o.total?.toLocaleString()} XAF</td>
+                      <td><span className={`badge badge-${o.status}`}>{o.status}</span></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          </div>
+
+          <footer className="footer">
+            <p>© 2026 KIBALU Security Solutions — Brazzaville, Congo</p>
+          </footer>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
